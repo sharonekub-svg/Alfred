@@ -7,6 +7,7 @@
   --mut:#5E665C;
   --line:#E7EAE4;
   --bg:#FCFCFB;
+  --logo-ink:#38463b;
 }
 
 *{ box-sizing:border-box; }
@@ -71,3 +72,7 @@ body{
 .req{ font-size:12px; font-weight:600; color:var(--accent-d); background:var(--tint); padding:2px 8px; border-radius:999px; margin-left:6px; }
 .opt{ font-size:12px; font-weight:600; color:#9AA197; margin-left:6px; }
 input[type=radio], input[type=checkbox]{ accent-color:var(--accent); }
+
+/* ---- Brand logo lockup (tree mark + "alfred" wordmark) ---- */
+.brand-mark{ width:26px; height:26px; color:var(--logo-ink); display:block; flex:none; }
+.brand-word{ font-size:21px; font-weight:700; letter-spacing:-.01em; color:var(--logo-ink); line-height:1; }

@@ -54,3 +54,20 @@ body{
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; }
 }
+
+/* ---- Onboarding questionnaire ---- */
+.q-card{ margin:0; }
+.q-legend{ font-size:16px; font-weight:700; padding:0; }
+.q-help{ font-size:14px; color:var(--mut); margin:8px 0 14px; }
+.q-options{ display:flex; flex-wrap:wrap; gap:10px; }
+.q-opt{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:15px; font-weight:600;
+  border:1px solid var(--line); border-radius:999px; padding:9px 16px;
+  cursor:pointer; transition:border-color .2s, background .2s;
+}
+.q-opt:hover{ border-color:var(--accent); }
+.q-opt:has(input:checked){ border-color:var(--accent); background:var(--tint); color:var(--accent-d); }
+.req{ font-size:12px; font-weight:600; color:var(--accent-d); background:var(--tint); padding:2px 8px; border-radius:999px; margin-left:6px; }
+.opt{ font-size:12px; font-weight:600; color:#9AA197; margin-left:6px; }
+input[type=radio], input[type=checkbox]{ accent-color:var(--accent); }

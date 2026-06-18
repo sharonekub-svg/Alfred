@@ -9,6 +9,20 @@
   function init() {
     startCoin(reduce);
     setupCounters(reduce);
+    wireEarlyAccess();
+  }
+
+  // ---- "Request access" → save email, go to onboarding ----
+  function wireEarlyAccess() {
+    var form = document.querySelector('.cta-form');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var input = form.querySelector('input[type="email"]');
+      var email = input && input.value ? input.value.trim() : '';
+      try { if (email) localStorage.setItem('alfred_email', JSON.stringify(email)); } catch (err) {}
+      window.location.href = './onboarding.html';
+    });
   }
 
   // ---- Stat counters (count up when the trust band scrolls into view) ----

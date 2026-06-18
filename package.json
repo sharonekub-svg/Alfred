@@ -1,0 +1,13 @@
+{
+  "name": "alfred",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Alfred — discipline-first AI investing co-pilot. Static landing + demo dashboard with a Vercel serverless research agent.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest"
+  }
+}

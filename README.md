@@ -1,39 +1,67 @@
-# Alfred — Landing Page
+# Alfred — Discipline-first AI investing co-pilot
 
-Marketing landing page for **Alfred**, a discipline-first AI investing co-pilot
-that researches real market data and proposes data-backed trades — where *you*
-set the rules and approve every single trade.
+Alfred researches real market data and proposes data-backed trades. **You set the
+rules. You approve every single one.** This repo contains the marketing landing
+page plus a working **$10,000 paper-trading demo** driven by a research agent.
 
-This page is a faithful, production implementation of the
-[Claude Design](https://claude.ai/design) handoff `Alfred Landing.dc.html`.
-The prototype's `<x-dc>` framework has been stripped out and rebuilt as a
-zero-dependency static site:
+Built to deploy on **Vercel** with zero config: a static front-end plus one
+serverless function for the AI + market data.
 
-- the design's `style-hover` attributes → real CSS `:hover` rules
-- the `DCLogic` React-style component → plain `app.js` (spinning 3D coin canvas
-  + scroll-triggered stat counters)
-- `prefers-reduced-motion` is respected in both CSS and JS
+## What's here
 
-## Structure
+| Path | What it is |
+|------|------------|
+| `index.html` | Landing page (faithful build of the Claude Design handoff). Its "Request access" form sends you into the demo. |
+| `onboarding.html` | The **mandatory questionnaire**. Alfred can't propose a trade until you've answered every required question — your answers become guardrails. |
+| `dashboard.html` | The demo dashboard: $10k paper account, holdings, the agent's proposals, approve/decline, and your guardrails. |
+| `api/propose.js` | **Serverless research agent.** Pulls live quotes + analyst recommendations (Finnhub) and asks Claude (`claude-opus-4-8`) for one rule-compliant idea. Falls back to a simulated engine if keys aren't set. |
+| `app/` | Front-end logic: `state.js` (demo state in `localStorage`), `onboarding.js`, `dashboard.js`. |
+| `styles.css`, `app.js` | Shared design tokens / animations and the landing-page coin canvas + counters. |
+| `design/` | Original Claude Design handoff bundle, kept for reference. |
 
-```
-index.html      # the page (markup + inline styles, verbatim from the design)
-styles.css      # CSS variables, keyframes, hover states, responsive layer
-app.js          # canvas coin animation + IntersectionObserver stat counters
-design/         # original Claude Design handoff bundle, kept for reference
-```
+## The flow
 
-## Run locally
+1. **Landing → Request access.** Enter your email on `index.html`; it's saved and you're taken to onboarding. (Google sign-in is planned; email is the demo entry for now.)
+2. **Onboarding (rules first).** Answer risk tolerance, horizon, max position size, leverage, daily cap, allowed assets, and banned sectors. *Every required question must be answered before trading unlocks.* "Require my approval" is locked on and can never be disabled.
+3. **Dashboard.** Start with **$10,000 in demo funds**. Tap **Ask Alfred to research** → the agent returns one proposal checked against your rules → you **Approve** or **Decline**. Approvals update the paper portfolio. The daily proposal cap is enforced.
 
-It's a static site — open `index.html` directly, or serve it:
+## Real data + Claude (env vars)
 
-```bash
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
+The agent runs in **real mode** when these are set as Vercel **Environment
+Variables** (Project → Settings → Environment Variables). They stay server-side
+and never reach the browser:
+
+| Variable | Used for | Get one |
+|----------|----------|---------|
+| `ANTHROPIC_API_KEY` | Claude reasoning (`claude-opus-4-8`) | https://console.anthropic.com |
+| `FINNHUB_API_KEY` | Live quotes + analyst recommendation trends | https://finnhub.io (free tier) |
+
+Without them, `api/propose.js` automatically falls back to a **simulated**
+engine so the demo still works — and upgrades to live data + Claude the moment
+the keys are present. No code change needed.
 
 ## Deploy on Vercel
 
-No build step or configuration is required. Vercel detects this as a static
-site and serves `index.html` at the root. Import the repository in the Vercel
-dashboard (or run `vercel`) and deploy.
+1. Import `sharonekub-svg/alfred` in the Vercel dashboard.
+2. Vercel detects a static site + serverless functions in `/api` — no build command needed; it installs `@anthropic-ai/sdk` automatically.
+3. Add the two environment variables above (optional for the simulated demo, required for real mode).
+4. Deploy.
+
+## Run locally
+
+The static pages work from any static server, but `/api/propose` only runs on
+Vercel (or `vercel dev`). For the full agent locally:
+
+```bash
+npm install
+npx vercel dev   # serves the site + the serverless function
+```
+
+Plain `python3 -m http.server` serves the pages; the dashboard will show a
+friendly notice if `/api/propose` isn't running.
+
+## Roadmap
+
+- Official Alfred logo (pending the asset file).
+- Google sign-in and real accounts (currently email → dashboard, demo state in `localStorage`).
+- Connect a real broker (the demo is paper-only by design).

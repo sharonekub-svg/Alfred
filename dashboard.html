@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — Alfred</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <nav style="position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(14px); background:rgba(252,252,251,.72); border-bottom:1px solid var(--line);">
+    <div style="max-width:1100px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px;">
+      <div style="display:flex; align-items:center; gap:11px;">
+        <div style="width:24px; height:24px; border-radius:50%; background:radial-gradient(120% 120% at 30% 25%, var(--accent-l), var(--accent-d)); box-shadow:0 2px 6px rgba(10,94,57,.35), inset 0 1px 1px rgba(255,255,255,.45);"></div>
+        <span style="font-size:19px; font-weight:700; letter-spacing:-.02em;">Alfred</span>
+        <span style="font-size:12px; font-weight:700; color:var(--accent-d); background:var(--tint); padding:4px 10px; border-radius:999px;">DEMO</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <a href="./onboarding.html" class="nav-link" style="font-size:14px; color:var(--mut); text-decoration:none;">Edit rules</a>
+        <button id="reset-btn" class="btn-decline" style="font-family:inherit; font-size:14px; font-weight:600; color:var(--ink); background:#fff; border:1px solid var(--line); padding:8px 14px; border-radius:999px; cursor:pointer; transition:background .2s, border-color .2s;">Reset demo</button>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px; margin:0 auto; padding:32px 24px 80px;">
+
+    <!-- ACCOUNT SUMMARY -->
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;" class="how-grid">
+      <div style="background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px;">
+        <div style="font-size:13px; color:var(--mut);">Total value</div>
+        <div id="sum-total" style="font-size:30px; font-weight:700; letter-spacing:-.02em; margin-top:4px;">—</div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px;">
+        <div style="font-size:13px; color:var(--mut);">Cash</div>
+        <div id="sum-cash" style="font-size:30px; font-weight:700; letter-spacing:-.02em; margin-top:4px;">—</div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px;">
+        <div style="font-size:13px; color:var(--mut);">Invested</div>
+        <div id="sum-invested" style="font-size:30px; font-weight:700; letter-spacing:-.02em; margin-top:4px;">—</div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px;">
+        <div style="font-size:13px; color:var(--mut);">Profit / loss</div>
+        <div id="sum-pl" style="font-size:30px; font-weight:700; letter-spacing:-.02em; margin-top:4px;">—</div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1.5fr 1fr; gap:24px; margin-top:24px;" class="rules-grid">
+
+      <!-- LEFT: proposal + holdings + activity -->
+      <div>
+        <!-- PROPOSAL PANEL -->
+        <section style="background:#fff; border:1px solid var(--line); border-radius:18px; padding:24px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+            <div>
+              <div style="font-size:14px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent);">Agent</div>
+              <h2 style="font-size:24px; font-weight:700; letter-spacing:-.02em; margin:6px 0 0;">Alfred's next idea</h2>
+              <p id="proposals-left" style="font-size:13px; color:var(--mut); margin:6px 0 0;"></p>
+            </div>
+            <button id="propose-btn" class="btn-approve" style="font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:var(--accent); border:none; padding:13px 22px; border-radius:999px; cursor:pointer; box-shadow:0 2px 4px rgba(10,94,57,.25); transition:transform .15s, box-shadow .2s;">Ask Alfred to research</button>
+          </div>
+
+          <!-- loading -->
+          <div id="propose-loading" style="display:none; align-items:center; gap:12px; margin-top:22px; color:var(--mut); font-size:15px;">
+            <span style="width:18px; height:18px; border-radius:50%; border:2px solid var(--line); border-top-color:var(--accent); display:inline-block; animation:a-spin .8s linear infinite;"></span>
+            Researching markets within your rules…
+          </div>
+
+          <!-- empty / error -->
+          <div id="propose-empty" style="margin-top:18px; font-size:15px; color:var(--mut);">
+            Tap <strong>Ask Alfred to research</strong> and it will scan the market, check your guardrails, and bring you one data-backed idea to approve or decline.
+          </div>
+
+          <!-- proposal card injected here -->
+          <div id="proposal-mount" style="margin-top:18px;"></div>
+        </section>
+
+        <!-- HOLDINGS -->
+        <section style="background:#fff; border:1px solid var(--line); border-radius:18px; padding:24px; margin-top:24px;">
+          <h3 style="font-size:18px; font-weight:700; margin:0 0 6px;">Holdings</h3>
+          <div id="holdings-mount"></div>
+        </section>
+
+        <!-- ACTIVITY -->
+        <section style="background:#fff; border:1px solid var(--line); border-radius:18px; padding:24px; margin-top:24px;">
+          <h3 style="font-size:18px; font-weight:700; margin:0 0 6px;">Activity</h3>
+          <div id="activity-mount"></div>
+        </section>
+      </div>
+
+      <!-- RIGHT: guardrails -->
+      <aside>
+        <section style="background:#fff; border:1px solid var(--line); border-radius:18px; padding:24px; position:sticky; top:84px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+            <h3 style="font-size:18px; font-weight:700; margin:0;">Your guardrails</h3>
+            <span style="font-size:12px; font-weight:700; color:var(--accent-d); background:var(--tint); padding:5px 11px; border-radius:999px;">LOCKED BY YOU</span>
+          </div>
+          <div id="guardrails-mount"></div>
+          <a href="./onboarding.html" class="link-arrow" style="display:inline-flex; align-items:center; gap:8px; font-size:15px; font-weight:600; color:var(--accent-d); text-decoration:none; margin-top:16px; transition:gap .2s;">Edit your rules →</a>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <script src="./app/state.js"></script>
+  <script src="./app/dashboard.js"></script>
+</body>
+</html>

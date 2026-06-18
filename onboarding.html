@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set your rules — Alfred</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <nav style="position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(14px); background:rgba(252,252,251,.72); border-bottom:1px solid var(--line);">
+    <div style="max-width:760px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; gap:11px;">
+      <div style="width:24px; height:24px; border-radius:50%; background:radial-gradient(120% 120% at 30% 25%, var(--accent-l), var(--accent-d)); box-shadow:0 2px 6px rgba(10,94,57,.35), inset 0 1px 1px rgba(255,255,255,.45);"></div>
+      <span style="font-size:19px; font-weight:700; letter-spacing:-.02em;">Alfred</span>
+      <span style="margin-left:8px; font-size:12px; font-weight:700; color:var(--accent-d); background:var(--tint); padding:4px 10px; border-radius:999px;">DEMO SETUP</span>
+    </div>
+  </nav>
+
+  <main style="max-width:760px; margin:0 auto; padding:48px 24px 80px;">
+    <div style="font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">Before Alfred can trade</div>
+    <h1 style="font-size:38px; line-height:1.08; letter-spacing:-.03em; font-weight:700; margin:12px 0 0;">Answer every question. These become your rules.</h1>
+    <p style="font-size:17px; line-height:1.55; color:var(--mut); margin:14px 0 0; max-width:560px;">
+      Alfred can't propose or place a single trade until you've answered all of these. Your answers are guardrails the agent checks against every proposal — and <em style="font-style:normal; color:var(--ink); font-weight:600;">your approval can never be switched off.</em>
+    </p>
+
+    <div style="margin-top:18px; display:flex; align-items:center; gap:10px; background:var(--tint); border:1px solid rgba(14,139,83,.18); border-radius:12px; padding:14px 16px;">
+      <span style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:#fff; color:var(--accent-d); font-size:14px; font-weight:800;">$</span>
+      <div style="font-size:15px;"><strong>$10,000 in free demo funds.</strong> <span style="color:var(--mut);">Paper money only — no broker connected, nothing at risk.</span></div>
+    </div>
+
+    <form id="rules-form" style="margin-top:28px; display:flex; flex-direction:column; gap:18px;">
+
+      <!-- Risk tolerance -->
+      <fieldset class="q-card" style="border:1px solid var(--line); border-radius:16px; padding:22px; background:#fff;">
+        <legend class="q-legend">1 · Risk tolerance <span class="req">required</span></legend>
+        <p class="q-help">How much volatility should Alfred be willing to propose?</p>
+        <div class="q-options" role="radiogroup" data-name="risk">
+          <label class="q-opt"><input type="radio" name="risk" value="Conservative"> Conservative</label>
+          <label class="q-opt"><input type="radio" name="risk" value="Balanced"> Balanced</label>
+          <label class="q-opt"><input type="radio" name="risk" value="Aggressive"> Aggressive</label>
+        </div>
+      </fieldset>
+
+      <!-- Horizon -->
+      <fieldset class="q-card" style="border:1px solid var(--line); border-radius:16px; padding:22px; background:#fff;">
+        <legend class="q-legend">2 · Investment horizon <span class="req">required</span></legend>
+        <p class="q-help">How long do you expect to hold positions?</p>
+        <div class="q-options" role="radiogroup" data-name="horizon">
+          <label class="q-opt"><input type="radio" name="horizon" value="Short (under 1 year)"> Short · &lt;1y</label>
+          <label class="q-opt"><input type="radio" name="horizon" value="Medium (1–3 years)"> Medium · 1–3y</label>
+          <label class="q-opt"><input type="radio" name="horizon" value="Long (3+ years)"> Long · 3y+</label>
+        </div>
+      </fieldset>
+
+      <!-- Max position -->
+      <fieldset class="q-card" style="border:1px solid var(--line); border-radius:16px; padding:22px; background:#fff;">
+        <legend class="q-legend">3 · Max single position <span class="req">required</span></legend>
+        <p class="q-help">No proposed trade may push one holding above this share of your portfolio.</p>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <input type="range" id="maxPos" min="1" max="25" value="5" style="flex:1; accent-color:var(--accent);">
+          <span style="font-weight:700; font-size:18px; width:52px; text-align:right;"><span id="maxPosVal">5</span>%</span>
+        </div>
+      </fieldset>
+
+      <!-- Leverage -->
+      <fieldset class="q-card" style="border:1px solid var(--line); border-radius:16px; padding:22px; background:#fff;">
+        <legend class="q-legend">4 · Leverage <span class="req">required</span></legend>
+        <p class="q-help">May Alfred propose borrowed/margin exposure?</p>
+        <div class="q-options" role="radiogroup" data-name="leverage">
+          <label class="q-opt"><input type="radio" name="leverage" value="off" checked> Off (recommended)</label>
+          <label class="q-opt"><input type="radio" name="leverage" value="on"> Allowed</label>
+        </div>
+      </fieldset>
+
+      <!-- Daily cap -->
+      <fieldset class="q-card" style="border:1px solid var(--line); border-radius:16px; padding:22px; background:#fff;">
+        <legend class="q-legend">5 · Daily proposal cap <span class="req">required</span></legend>
+        <p class="q-help">Maximum trade ideas Alfred can bring you per day.</p>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <input type="range" id="dailyCap" min="1" max="10" value="3" style="flex:1; accent-color:var(--accent);">
+          <span style="font-weight:700; font-size:18px; width:52px; text-align:right;"><span id="dailyCapVal">3</span></span>
+        </div>
+      </fieldset>
+
+      <!-- Universe -->
+      <fieldset class="q-card" style="border:1px solid var(--line); border-radius:16px; padding:22px; background:#fff;">
+        <legend class="q-legend">6 · Allowed assets <span class="req">pick at least one</span></legend>
+        <p class="q-help">What is Alfred allowed to trade?</p>
+        <div class="q-options" data-name="assets">
+          <label class="q-opt"><input type="checkbox" name="assets" value="etf" checked> Broad-market ETFs</label>
+          <label class="q-opt"><input type="checkbox" name="assets" value="equity" checked> US equities</label>
+        </div>
+      </fieldset>
+
+      <!-- Banned sectors -->
+      <fieldset class="q-card" style="border:1px solid var(--line); border-radius:16px; padding:22px; background:#fff;">
+        <legend class="q-legend">7 · Banned sectors <span class="opt">optional</span></legend>
+        <p class="q-help">Sectors Alfred must never propose.</p>
+        <div class="q-options" data-name="banned">
+          <label class="q-opt"><input type="checkbox" name="banned" value="Energy"> Oil &amp; Gas</label>
+          <label class="q-opt"><input type="checkbox" name="banned" value="Tobacco"> Tobacco</label>
+          <label class="q-opt"><input type="checkbox" name="banned" value="Gambling"> Gambling</label>
+          <label class="q-opt"><input type="checkbox" name="banned" value="Defense"> Weapons / Defense</label>
+        </div>
+      </fieldset>
+
+      <!-- Approval (locked) -->
+      <div style="display:flex; align-items:center; justify-content:space-between; border:1px solid rgba(14,139,83,.25); border-radius:16px; padding:18px 22px; background:var(--tint);">
+        <div>
+          <div style="font-weight:700; font-size:15px;">Require my approval for every trade</div>
+          <div style="font-size:13px; color:var(--accent-d);">Locked on — this can never be turned off.</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px; color:var(--accent-d);">
+          <span style="width:38px; height:22px; background:var(--accent); border-radius:999px; position:relative;"><span style="position:absolute; top:2px; right:2px; width:18px; height:18px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.2);"></span></span>Always
+        </div>
+      </div>
+
+      <div id="form-error" style="display:none; color:#b4232a; font-size:14px; font-weight:600;"></div>
+
+      <button type="submit" class="btn-hero-primary" style="margin-top:4px; align-self:flex-start; display:inline-flex; align-items:center; gap:8px; font-size:16px; font-weight:700; color:#fff; background:var(--accent); padding:15px 28px; border-radius:999px; border:none; cursor:pointer; box-shadow:0 2px 4px rgba(10,94,57,.2); transition:transform .2s, box-shadow .2s;">
+        Save rules &amp; open dashboard →
+      </button>
+    </form>
+  </main>
+
+  <script src="./app/state.js"></script>
+  <script src="./app/onboarding.js"></script>
+</body>
+</html>

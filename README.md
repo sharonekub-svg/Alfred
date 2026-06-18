@@ -62,6 +62,5 @@ friendly notice if `/api/propose` isn't running.
 
 ## Roadmap
 
-- Official Alfred logo (pending the asset file).
 - Google sign-in and real accounts (currently email → dashboard, demo state in `localStorage`).
 - Connect a real broker (the demo is paper-only by design).

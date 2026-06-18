@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Alfred">
+  <g fill="#10160F">
+    <!-- trunk -->
+    <rect x="28.5" y="38" width="7" height="20" rx="3.5"/>
+    <!-- bushy canopy: overlapping lobes in one solid color -->
+    <circle cx="32" cy="20" r="13"/>
+    <circle cx="19" cy="29" r="10.5"/>
+    <circle cx="45" cy="29" r="10.5"/>
+    <circle cx="25" cy="38" r="9.5"/>
+    <circle cx="39" cy="38" r="9.5"/>
+    <circle cx="32" cy="33" r="12"/>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+:root{
+  --accent:#0E8B53;
+  --accent-d:#0A5E39;
+  --accent-l:#16A867;
+  --tint:#EAF6EF;
+  --ink:#10160F;
+  --mut:#5E665C;
+  --line:#E7EAE4;
+  --bg:#FCFCFB;
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{ background:rgba(14,139,83,.16); }
+
+/* ---- Keyframes (verbatim from the Alfred Landing design) ---- */
+@keyframes a-rise{ from{ opacity:0; transform:translateY(26px); } to{ opacity:1; transform:none; } }
+@keyframes a-float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
+@keyframes a-bob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-7px); } }
+@keyframes a-pulse{ 0%,100%{ opacity:.45; transform:scale(1); } 50%{ opacity:.9; transform:scale(1.06); } }
+@keyframes a-spin{ to{ transform:rotate(360deg); } }
+@keyframes a-glow{ 0%,100%{ opacity:.5; } 50%{ opacity:.85; } }
+
+/* ---- Hover states (ported from the prototype's style-hover attributes) ---- */
+.nav-link:hover{ color:var(--ink); }
+.btn-nav-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(14,139,83,.32); }
+.btn-hero-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 26px rgba(14,139,83,.34); }
+.btn-hero-secondary:hover{ border-color:var(--accent); background:var(--tint); }
+.card-how:hover{ transform:translateY(-4px); box-shadow:0 18px 40px rgba(16,22,15,.07); border-color:rgba(14,139,83,.3); }
+.btn-decline:hover{ background:var(--bg); border-color:#cfd4cb; }
+.btn-approve:hover{ transform:translateY(-1px); box-shadow:0 10px 24px rgba(14,139,83,.4); }
+.link-arrow:hover{ gap:13px; }
+.btn-cta:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.22); }
+
+/* ---- Light responsive layer (additive; desktop layout is unchanged) ---- */
+@media (max-width:880px){
+  .hero-grid,
+  .how-grid,
+  .proposal-grid,
+  .rules-grid{ grid-template-columns:1fr !important; }
+  .trust-grid{ grid-template-columns:1fr !important; }
+  .trust-grid > div{ border-right:none !important; border-bottom:1px solid var(--line); }
+  .trust-grid > div:last-child{ border-bottom:none; }
+  .hero-grid h1{ font-size:46px !important; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; }
+}

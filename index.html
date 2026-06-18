@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alfred — Your disciplined AI investing co-pilot</title>
+<meta name="description" content="Alfred researches real market data and proposes data-backed trades. You set the rules. You approve every single one.">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav style="position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(14px); background:rgba(252,252,251,.72); border-bottom:1px solid var(--line);">
+    <div style="max-width:1200px; margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:11px;">
+        <div style="width:26px; height:26px; border-radius:50%; background:radial-gradient(120% 120% at 30% 25%, var(--accent-l), var(--accent-d)); box-shadow:0 2px 6px rgba(10,94,57,.35), inset 0 1px 1px rgba(255,255,255,.45);"></div>
+        <span style="font-size:20px; font-weight:700; letter-spacing:-.02em;">Alfred</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:34px;">
+        <a href="#how" class="nav-link" style="font-size:15px; color:var(--mut); text-decoration:none;">How it works</a>
+        <a href="#proposal" class="nav-link" style="font-size:15px; color:var(--mut); text-decoration:none;">Proposals</a>
+        <a href="#rules" class="nav-link" style="font-size:15px; color:var(--mut); text-decoration:none;">Your rules</a>
+        <a href="#cta" class="btn-nav-cta" style="display:inline-flex; align-items:center; gap:7px; font-size:15px; font-weight:600; color:#fff; background:var(--accent); padding:10px 18px; border-radius:999px; text-decoration:none; box-shadow:0 1px 2px rgba(10,94,57,.25); transition:transform .2s, box-shadow .2s;">Get early access</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero-grid" style="position:relative; max-width:1200px; margin:0 auto; padding:96px 32px 72px; display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center;">
+    <div style="position:absolute; inset:0; pointer-events:none; background:radial-gradient(60% 50% at 78% 38%, rgba(14,139,83,.07), transparent 70%);"></div>
+
+    <div style="position:relative;">
+      <div style="opacity:0; animation:a-rise .8s ease-out both; display:inline-flex; align-items:center; gap:9px; background:var(--tint); border:1px solid rgba(14,139,83,.18); color:var(--accent-d); font-size:13px; font-weight:600; padding:7px 13px; border-radius:999px; letter-spacing:.01em;">
+        <span style="width:7px; height:7px; border-radius:50%; background:var(--accent); animation:a-pulse 2.2s ease-in-out infinite;"></span>
+        Discipline-first investing
+      </div>
+      <h1 style="opacity:0; animation:a-rise .8s ease-out .08s both; font-size:62px; line-height:1.02; letter-spacing:-.035em; font-weight:700; margin:22px 0 0;">
+        Your disciplined<br>AI investing<br><span style="color:var(--accent);">co-pilot.</span>
+      </h1>
+      <p style="opacity:0; animation:a-rise .8s ease-out .16s both; font-size:19px; line-height:1.55; color:var(--mut); max-width:440px; margin:24px 0 0;">
+        Alfred researches real market data and proposes data-backed trades. You set the rules. You approve <em style="font-style:normal; color:var(--ink); font-weight:600;">every single one.</em>
+      </p>
+      <div style="opacity:0; animation:a-rise .8s ease-out .24s both; display:flex; align-items:center; gap:14px; margin-top:34px;">
+        <a href="#cta" class="btn-hero-primary" style="display:inline-flex; align-items:center; gap:8px; font-size:16px; font-weight:600; color:#fff; background:var(--accent); padding:15px 26px; border-radius:999px; text-decoration:none; box-shadow:0 2px 4px rgba(10,94,57,.2); transition:transform .2s, box-shadow .2s;">Request early access →</a>
+        <a href="#how" class="btn-hero-secondary" style="display:inline-flex; align-items:center; gap:8px; font-size:16px; font-weight:600; color:var(--ink); background:transparent; padding:15px 22px; border-radius:999px; text-decoration:none; border:1px solid var(--line); transition:border-color .2s, background .2s;">See how it works</a>
+      </div>
+      <div style="opacity:0; animation:a-rise .8s ease-out .32s both; display:flex; align-items:center; gap:10px; margin-top:30px; font-size:14px; color:var(--mut);">
+        <span style="display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; background:var(--tint); color:var(--accent-d); font-size:12px; font-weight:800;">✓</span>
+        Alfred never places a trade without your approval.
+      </div>
+    </div>
+
+    <!-- COIN STAGE -->
+    <div style="position:relative; display:flex; align-items:center; justify-content:center; min-height:440px;">
+      <div style="position:absolute; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle, rgba(22,168,103,.20), transparent 65%); filter:blur(8px); animation:a-glow 5s ease-in-out infinite;"></div>
+      <div style="position:absolute; width:300px; height:300px; border-radius:50%; border:1px solid rgba(14,139,83,.14);"></div>
+      <div style="position:absolute; width:380px; height:380px; border-radius:50%; border:1px dashed rgba(14,139,83,.12); animation:a-spin 60s linear infinite;"></div>
+      <div style="position:relative; animation:a-float 6s ease-in-out infinite;">
+        <canvas id="coin" style="display:block;"></canvas>
+      </div>
+      <div style="position:absolute; top:34px; left:8px; background:#fff; border:1px solid var(--line); box-shadow:0 8px 22px rgba(16,22,15,.08); border-radius:12px; padding:9px 13px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; animation:a-bob 4.5s ease-in-out infinite;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--accent);"></span> Researching markets
+      </div>
+      <div style="position:absolute; bottom:48px; right:0; background:#fff; border:1px solid var(--line); box-shadow:0 8px 22px rgba(16,22,15,.08); border-radius:12px; padding:9px 13px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; animation:a-bob 5.2s ease-in-out infinite .8s;">
+        <span style="color:var(--accent-d);">✓</span> Within your rules
+      </div>
+    </div>
+  </header>
+
+  <!-- TRUST BAND -->
+  <section id="trust" style="max-width:1200px; margin:0 auto; padding:8px 32px 40px; opacity:0; animation:a-rise .85s ease-out both; animation-timeline:view(); animation-range:entry 4% cover 30%;">
+    <div class="trust-grid" style="display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); border-radius:18px; overflow:hidden; background:#fff;">
+      <div style="padding:30px 32px; border-right:1px solid var(--line);">
+        <div style="font-size:42px; font-weight:700; letter-spacing:-.03em; color:var(--accent);"><span id="s1">0</span>%</div>
+        <div style="font-size:15px; color:var(--mut); margin-top:4px;">of trades approved by you</div>
+      </div>
+      <div style="padding:30px 32px; border-right:1px solid var(--line);">
+        <div style="font-size:42px; font-weight:700; letter-spacing:-.03em; color:var(--ink);">0</div>
+        <div style="font-size:15px; color:var(--mut); margin-top:4px;">trades placed without permission</div>
+      </div>
+      <div style="padding:30px 32px;">
+        <div style="font-size:42px; font-weight:700; letter-spacing:-.03em; color:var(--ink);"><span id="s3">0</span>/7</div>
+        <div style="font-size:15px; color:var(--mut); margin-top:4px;">market research, on your behalf</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" style="max-width:1200px; margin:0 auto; padding:72px 32px;">
+    <div style="opacity:0; animation:a-rise .85s ease-out both; animation-timeline:view(); animation-range:entry 0% cover 28%; max-width:620px; margin-bottom:52px;">
+      <div style="font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">How it works</div>
+      <h2 style="font-size:42px; line-height:1.08; letter-spacing:-.03em; font-weight:700; margin:14px 0 0;">Research, propose, and then — you decide.</h2>
+      <p style="font-size:18px; line-height:1.55; color:var(--mut); margin:16px 0 0;">Alfred does the relentless work of monitoring the market. The final call is always, only, yours.</p>
+    </div>
+    <div class="how-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      <div class="card-how" style="opacity:0; animation:a-rise .85s ease-out both; animation-timeline:view(); animation-range:entry 0% cover 30%; background:#fff; border:1px solid var(--line); border-radius:18px; padding:30px; transition:transform .25s, box-shadow .25s, border-color .25s;">
+        <div style="width:46px; height:46px; border-radius:13px; background:var(--tint); color:var(--accent-d); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800;">01</div>
+        <h3 style="font-size:21px; font-weight:700; letter-spacing:-.02em; margin:22px 0 0;">Researches real data</h3>
+        <p style="font-size:16px; line-height:1.55; color:var(--mut); margin:10px 0 0;">Alfred continuously scans live prices, fundamentals, and trends across the markets you care about.</p>
+      </div>
+      <div class="card-how" style="opacity:0; animation:a-rise .85s ease-out both; animation-timeline:view(); animation-range:entry 0% cover 30%; background:#fff; border:1px solid var(--line); border-radius:18px; padding:30px; transition:transform .25s, box-shadow .25s, border-color .25s;">
+        <div style="width:46px; height:46px; border-radius:13px; background:var(--tint); color:var(--accent-d); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800;">02</div>
+        <h3 style="font-size:21px; font-weight:700; letter-spacing:-.02em; margin:22px 0 0;">Proposes a trade</h3>
+        <p style="font-size:16px; line-height:1.55; color:var(--mut); margin:10px 0 0;">Each idea arrives with a clear thesis and the data behind it — never a black box, always a rationale.</p>
+      </div>
+      <div class="card-how" style="opacity:0; animation:a-rise .85s ease-out both; animation-timeline:view(); animation-range:entry 0% cover 30%; background:#fff; border:1px solid var(--line); border-radius:18px; padding:30px; transition:transform .25s, box-shadow .25s, border-color .25s;">
+        <div style="width:46px; height:46px; border-radius:13px; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800;">03</div>
+        <h3 style="font-size:21px; font-weight:700; letter-spacing:-.02em; margin:22px 0 0;">You approve it</h3>
+        <p style="font-size:16px; line-height:1.55; color:var(--mut); margin:10px 0 0;">Approve, decline, or adjust. Nothing moves until you say so — and every rule you set is enforced.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPOSAL SHOWCASE -->
+  <section id="proposal" style="background:#0C120E; color:#fff;">
+    <div class="proposal-grid" style="max-width:1200px; margin:0 auto; padding:84px 32px; display:grid; grid-template-columns:.92fr 1.08fr; gap:56px; align-items:center;">
+      <div style="opacity:0; animation:a-rise .85s ease-out both; animation-timeline:view(); animation-range:entry 0% cover 30%;">
+        <div style="font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-l);">Every proposal</div>
+        <h2 style="font-size:42px; line-height:1.08; letter-spacing:-.03em; font-weight:700; margin:14px 0 0;">A clear thesis. The data. Your call.</h2>
+        <p style="font-size:18px; line-height:1.6; color:#A9B0A6; margin:18px 0 0; max-width:420px;">No hype, no pressure. Alfred shows you exactly why it's proposing a move, confirms it fits your rules, and waits for your decision.</p>
+        <div style="display:flex; flex-direction:column; gap:14px; margin-top:30px;">
+          <div style="display:flex; gap:12px; align-items:flex-start; font-size:16px; color:#D6DBD3;"><span style="color:var(--accent-l); font-weight:800;">✓</span> Plain-language rationale on every idea</div>
+          <div style="display:flex; gap:12px; align-items:flex-start; font-size:16px; color:#D6DBD3;"><span style="color:var(--accent-l); font-weight:800;">✓</span> Checked against your guardrails before it reaches you</div>
+          <div style="display:flex; gap:12px; align-items:flex-start; font-size:16px; color:#D6DBD3;"><span style="color:var(--accent-l); font-weight:800;">✓</span> One tap to approve, decline, or hold</div>
+        </div>
+      </div>
+
+      <div style="opacity:0; animation:a-rise .9s ease-out both; animation-timeline:view(); animation-range:entry 0% cover 34%; background:#fff; color:var(--ink); border-radius:22px; padding:26px; box-shadow:0 30px 70px rgba(0,0,0,.4); max-width:480px; justify-self:end; width:100%;">
+        <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:16px;">
+          <div style="display:flex; align-items:center; gap:11px;">
+            <div style="width:26px;height:26px;border-radius:50%;background:radial-gradient(120% 120% at 30% 25%, var(--accent-l), var(--accent-d));"></div>
+            <span style="font-weight:700;">Alfred</span>
+            <span style="font-size:13px; color:var(--mut);">· proposal</span>
+          </div>
+          <span style="font-size:13px; color:var(--mut);">Today, 9:42 AM</span>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-top:20px;">
+          <div>
+            <div style="font-size:13px; color:var(--mut); font-weight:600;">BROAD-MARKET ETF</div>
+            <div style="font-size:26px; font-weight:700; letter-spacing:-.02em; margin-top:2px;">Add 2.0% to position</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:13px; color:var(--mut);">Confidence</div>
+            <div style="font-size:22px; font-weight:700; color:var(--accent-d);">High</div>
+          </div>
+        </div>
+        <p style="font-size:15px; line-height:1.55; color:#3C4338; margin:16px 0 0;">Trend strength and improving breadth support a measured add. Sizing stays well within your single-position limit.</p>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px;">
+          <div style="background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:12px;">
+            <div style="font-size:12px; color:var(--mut);">50-day trend</div>
+            <div style="font-size:18px; font-weight:700; color:var(--accent-d);">+4.1%</div>
+          </div>
+          <div style="background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:12px;">
+            <div style="font-size:12px; color:var(--mut);">Volatility</div>
+            <div style="font-size:18px; font-weight:700;">Low</div>
+          </div>
+          <div style="background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:12px;">
+            <div style="font-size:12px; color:var(--mut);">P/E</div>
+            <div style="font-size:18px; font-weight:700;">18.2</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-top:16px; background:var(--tint); border-radius:10px; padding:10px 13px; font-size:13px; font-weight:600; color:var(--accent-d);">
+          <span style="font-weight:800;">✓</span> Within your rules · max position 5% · no leverage · US equities only
+        </div>
+        <div style="display:flex; gap:12px; margin-top:20px;">
+          <button class="btn-decline" style="flex:1; font-family:inherit; font-size:15px; font-weight:600; color:var(--ink); background:#fff; border:1px solid var(--line); padding:14px; border-radius:12px; cursor:pointer; transition:background .2s, border-color .2s;">Decline</button>
+          <button class="btn-approve" style="flex:2; font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:var(--accent); border:none; padding:14px; border-radius:12px; cursor:pointer; box-shadow:0 2px 4px rgba(10,94,57,.25); transition:transform .15s, box-shadow .2s;">Approve trade</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULES / GUARDRAILS -->
+  <section id="rules" class="rules-grid" style="max-width:1200px; margin:0 auto; padding:84px 32px; display:grid; grid-template-columns:1.08fr .92fr; gap:56px; align-items:center;">
+    <div style="opacity:0; animation:a-rise .9s ease-out both; animation-timeline:view(); animation-range:entry 0% cover 32%; background:#fff; border:1px solid var(--line); border-radius:22px; padding:28px; box-shadow:0 18px 44px rgba(16,22,15,.06);">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+        <div style="font-size:17px; font-weight:700;">Your guardrails</div>
+        <div style="font-size:12px; font-weight:700; color:var(--accent-d); background:var(--tint); padding:5px 11px; border-radius:999px;">LOCKED BY YOU</div>
+      </div>
+      <div style="display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid var(--line);">
+          <div><div style="font-weight:600; font-size:15px;">Max single position</div><div style="font-size:13px; color:var(--mut);">No idea can exceed this size</div></div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:120px; height:7px; background:var(--bg); border:1px solid var(--line); border-radius:999px; overflow:hidden;"><div style="width:50%; height:100%; background:var(--accent);"></div></div>
+            <span style="font-weight:700; font-size:15px; width:34px; text-align:right;">5%</span>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid var(--line);">
+          <div><div style="font-weight:600; font-size:15px;">Leverage</div><div style="font-size:13px; color:var(--mut);">Borrowed exposure</div></div>
+          <div style="display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px; color:var(--mut);"><span style="width:38px; height:22px; background:#E7EAE4; border-radius:999px; position:relative;"><span style="position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.2);"></span></span>Off</div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid var(--line);">
+          <div><div style="font-weight:600; font-size:15px;">Daily proposal cap</div><div style="font-size:13px; color:var(--mut);">Max ideas per day</div></div>
+          <span style="font-weight:700; font-size:15px;">3</span>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0 6px;">
+          <div><div style="font-weight:600; font-size:15px;">Require my approval</div><div style="font-size:13px; color:var(--mut);">Cannot be turned off</div></div>
+          <div style="display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px; color:var(--accent-d);"><span style="width:38px; height:22px; background:var(--accent); border-radius:999px; position:relative;"><span style="position:absolute; top:2px; right:2px; width:18px; height:18px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.2);"></span></span>Always</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="opacity:0; animation:a-rise .85s ease-out both; animation-timeline:view(); animation-range:entry 0% cover 30%;">
+      <div style="font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">Your rules</div>
+      <h2 style="font-size:42px; line-height:1.08; letter-spacing:-.03em; font-weight:700; margin:14px 0 0;">Boundaries Alfred can never cross.</h2>
+      <p style="font-size:18px; line-height:1.6; color:var(--mut); margin:18px 0 0; max-width:430px;">Set position limits, banned sectors, leverage rules, and pacing. Alfred checks every proposal against them before it ever reaches you — and approval can never be switched off.</p>
+      <a href="#cta" class="link-arrow" style="display:inline-flex; align-items:center; gap:8px; font-size:16px; font-weight:600; color:var(--accent-d); text-decoration:none; margin-top:26px; transition:gap .2s;">Set your rules →</a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" style="max-width:1200px; margin:0 auto 72px; padding:0 32px;">
+    <div style="opacity:0; animation:a-rise .9s ease-out both; animation-timeline:view(); animation-range:entry 0% cover 34%; position:relative; overflow:hidden; background:linear-gradient(135deg, var(--accent-d), var(--accent)); border-radius:26px; padding:72px 56px; text-align:center;">
+      <div style="position:absolute; width:420px; height:420px; border-radius:50%; border:1px solid rgba(255,255,255,.16); top:-180px; right:-120px;"></div>
+      <div style="position:absolute; width:300px; height:300px; border-radius:50%; border:1px solid rgba(255,255,255,.12); bottom:-160px; left:-80px;"></div>
+      <h2 style="position:relative; font-size:46px; line-height:1.06; letter-spacing:-.035em; font-weight:700; color:#fff; margin:0 auto; max-width:680px;">Put a disciplined co-pilot in your corner.</h2>
+      <p style="position:relative; font-size:18px; line-height:1.55; color:rgba(255,255,255,.85); margin:18px auto 0; max-width:480px;">Join the early access list. Set your rules, review your first proposals, and stay fully in control.</p>
+      <form class="cta-form" style="position:relative; display:flex; gap:12px; justify-content:center; margin-top:34px; flex-wrap:wrap;" onsubmit="return false;">
+        <input type="email" placeholder="you@email.com" aria-label="Email address" style="font-family:inherit; font-size:16px; padding:15px 20px; border-radius:999px; border:none; width:280px; outline:none; box-shadow:0 2px 8px rgba(0,0,0,.12);" />
+        <button class="btn-cta" type="submit" style="font-family:inherit; font-size:16px; font-weight:700; color:var(--accent-d); background:#fff; border:none; padding:15px 28px; border-radius:999px; cursor:pointer; transition:transform .2s, box-shadow .2s;">Request access</button>
+      </form>
+      <div style="position:relative; font-size:13px; color:rgba(255,255,255,.7); margin-top:16px;">No card required · You approve every trade · Cancel anytime</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid var(--line); background:#fff;">
+    <div style="max-width:1200px; margin:0 auto; padding:40px 32px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="width:22px; height:22px; border-radius:50%; background:radial-gradient(120% 120% at 30% 25%, var(--accent-l), var(--accent-d));"></div>
+        <span style="font-weight:700; font-size:17px;">Alfred</span>
+      </div>
+      <div style="display:flex; gap:28px; font-size:14px; color:var(--mut);">
+        <a href="#how" class="nav-link" style="color:var(--mut); text-decoration:none;">How it works</a>
+        <a href="#rules" class="nav-link" style="color:var(--mut); text-decoration:none;">Your rules</a>
+        <a href="#cta" class="nav-link" style="color:var(--mut); text-decoration:none;">Early access</a>
+      </div>
+      <div style="font-size:13px; color:#9AA197;">Not investment advice. You approve every trade.</div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
